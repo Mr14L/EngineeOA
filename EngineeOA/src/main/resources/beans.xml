@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	
+	<!-- 注释扫描路径 -->
+	<context:component-scan base-package="com.enginee.dao.impl,
+	com.enginee.service.impl,
+	com.enginee.controller"/>
+	<context:property-placeholder location="classpath:*.properties" order="2"/>
+	<!-- 事务管理使用注释 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 使用GBLIB，基于类创建代理对象，用于业务层事务 -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+	
+	<!-- 数据源 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverclass}"/>
+		<property name="username" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="url" value="${jdbc.url}"/>
+	</bean>
+	<!-- 基于数据源与持久化配置创建实体管理器  -->
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="persistenceXmlLocation" value="classpath:persistence.xml"/>
+		<property name="persistenceUnitName" value="enginee"/>
+		<!-- 自动扫描实体类，配置在实体类上一层目录，也可在持久化配置文件中配置 -->
+		<property name="packagesToScan" value="com.enginee.model"></property>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory"></property>
+	</bean>
+	<import resource="springmvc.xml"/>
+</beans>
