@@ -11,7 +11,6 @@
 			<property name="hibernate.show_sql" value="true"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/> 
 			<!--基于注释自动扫描实体类  -->
 			<property name="hibernate.archive.autodetection" value="class" />
 		</properties>
