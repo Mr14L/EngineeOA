@@ -107,7 +107,7 @@
 
   <!-- content start -->
   <div class="admin-content">
-  <iframe id="frame" src="${pageContext.request.contextPath}/content/admin-help" width="100%" height="100%"></iframe>
+  <iframe id="frame" src="${pageContext.request.contextPath}/content/admin-index" width="100%" height="100%"></iframe>
      <footer class="admin-content-footer">
       <hr>
       <p class="am-padding-left">© 2017 AllMobilize, Inc. Licensed under MIT license.</p>

@@ -17,6 +17,8 @@ import com.enginee.util.TransResult;
 public class LoginController{
 	@Autowired
 	private UserService userService;
+
+	//验证用户登录
 	@RequestMapping("/validate")
 	@ResponseBody
 	public TransResult validate(String email,String password) {
