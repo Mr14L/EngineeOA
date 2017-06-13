@@ -73,7 +73,7 @@
           <form class="am-form am-form-horizontal">
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label" >姓名 / Name</label>
-                <label  for="user-name" class="am-u-sm-3 am-form-label">李若楠</label>
+                <label  for="user-name" class="am-u-sm-3 am-form-label"> ${user.name} </label>
               <div class="am-u-sm-9">
               </div>
             </div>
@@ -81,35 +81,35 @@
             
             <div class="am-form-group">
               <label for="user-zhicheng" class="am-u-sm-3 am-form-label">职称 / Academic</label>
-               <label for="user-zhicheng" class="am-u-sm-3 am-form-label">叫兽</label>
+               <label for="user-zhicheng" class="am-u-sm-3 am-form-label"> ${user.academic} </label>
               <div class="am-u-sm-9">
               </div>
             </div>
  			 <hr/>
             <div class="am-form-group">
               <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
-              <label for="user-email" class="am-u-sm-5 am-form-label">1503933514@qq.com</label>
+              <label for="user-email" class="am-u-sm-5 am-form-label"> ${user.email } </label>
               <div class="am-u-sm-6">
               </div>
             </div>
 			  <hr/>
             <div class="am-form-group">
               <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
-              <label for="user-phone" class="am-u-sm-4 am-form-label">18846037529</label>
+              <label for="user-phone" class="am-u-sm-4 am-form-label"> ${user.telephone } </label>
               <div class="am-u-sm-6">
               </div>
             </div>
 			  <hr/>
             <div class="am-form-group">
               <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
-              <label for="user-QQ" class="am-u-sm-4 am-form-label">1503933514</label>
+              <label for="user-QQ" class="am-u-sm-4 am-form-label"> ${user.qq} </label>
               <div class="am-u-sm-7">
               </div>
             </div>
 			  <hr/>
             <div class="am-form-group">
               <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-              <label for="user-intro" class="am-u-sm-4 am-form-label">漂亮</label>
+              <label for="user-intro" class="am-u-sm-4 am-form-label"> ${user.intro} </label>
               <div class="am-u-sm-8">
 	              </div>
               </div>

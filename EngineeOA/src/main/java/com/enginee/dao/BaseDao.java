@@ -70,6 +70,16 @@ public abstract class BaseDao<T>{
 		return typedQuery.getResultList();
 	}
 	
+	public List<T> findUsers() {
+		// TODO Auto-generated method stub
+		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = builder.createQuery(clazz);
+		Root<T> root = criteriaQuery.from(clazz);
+		criteriaQuery.orderBy(builder.asc(root.get("email")));
+		TypedQuery<T> typedQuery = getCurrentSession().createQuery(criteriaQuery);
+		return typedQuery.getResultList();
+	}
+	
 	public List<T> find(int firstResult, int maxResults) {
 		CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
 		CriteriaQuery<T> criteriaQuery = builder.createQuery(clazz);

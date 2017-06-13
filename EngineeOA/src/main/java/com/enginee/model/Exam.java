@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 public class Exam{
 	@Id
@@ -18,7 +20,9 @@ public class Exam{
 	private String examName;
 	//科目名称
 	private String subjectName;
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime startTime;
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime endTime;
 	//考试地点
 	private String place;
@@ -27,7 +31,8 @@ public class Exam{
 	//对应监考人员
 	@ManyToMany
 	private Set<User> users = new HashSet<>();
-	
+	//实际人数
+	private Integer incount = users.size();
 	public Integer getId(){
 		return id;
 	}
@@ -46,18 +51,7 @@ public class Exam{
 	public void setSubjectName(String subjectName){
 		this.subjectName = subjectName;
 	}
-	public LocalDateTime getStartTime(){
-		return startTime;
-	}
-	public void setStartTime(LocalDateTime startTime){
-		this.startTime = startTime;
-	}
-	public LocalDateTime getEndTime(){
-		return endTime;
-	}
-	public void setEndTime(LocalDateTime endTime){
-		this.endTime = endTime;
-	}
+	
 	public String getPlace(){
 		return place;
 	}
@@ -75,5 +69,23 @@ public class Exam{
 	}
 	public void setUsers(Set<User> users){
 		this.users = users;
+	}
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(LocalDateTime startTime) {
+		this.startTime = startTime;
+	}
+	public LocalDateTime getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(LocalDateTime endTime) {
+		this.endTime = endTime;
+	}
+	public Integer getIncount() {
+		return incount;
+	}
+	public void setIncount(Integer incount) {
+		this.incount = incount;
 	}
 }

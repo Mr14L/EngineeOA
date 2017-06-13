@@ -23,10 +23,13 @@ public final class PageTransController{
 	public String toTargetPage1(@PathVariable String page) {
 		return page;
 	}
-	
-	@RequestMapping("/exam/{page}")
-	public String toTargetPage2(@PathVariable String page) {
-		return page;
+	@RequestMapping("/exam/exam-add")
+	public String toTargetPage2(){
+		return "exam-add";
+	}
+	@RequestMapping("/exam/exam-modify")
+	public String toTargetPage5(){
+		return "exam-modify";
 	}
 	@RequestMapping("/task/{page}")
 	public String toTargetPage3(@PathVariable String page) {
@@ -36,5 +39,4 @@ public final class PageTransController{
 	public String toTargetPage4(@PathVariable String page) {
 		return page;
 	}
-	
 }

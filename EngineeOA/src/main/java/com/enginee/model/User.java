@@ -17,6 +17,8 @@ public class User{
 	private String name;
 	private String telephone;
 	private String password;
+	private String qq;
+	private String intro;
 	//职称
 	private String academic;
 	//权限 用户,管理员,超级管理员
@@ -31,6 +33,8 @@ public class User{
 	private Set<Task> tasks = new HashSet<>();
 	@OneToOne(mappedBy="user")
 	private Reply reply;
+	//同时监考场次
+	private Integer ecount = exams.size();
 	public String getName(){
 		return name;
 	}
@@ -87,5 +91,39 @@ public class User{
 	}
 	public void setTasks(Set<Task> tasks){
 		this.tasks = tasks;
+	}
+	public String getQq() {
+		return qq;
+	}
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+	public String getIntro() {
+		return intro;
+	}
+	public void setIntro(String intro) {
+		this.intro = intro;
+	}
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", name=" + name + ", telephone=" + telephone + ", password=" + password
+				+ ", qq=" + qq + ", intro=" + intro + ", academic=" + academic + ", author=" + author + ", headFile="
+				+ headFile + ", createTime=" + createTime + ", exams=" + exams + ", tasks=" + tasks + ", reply=" + reply
+				+ "]";
+	}
+	public Integer getEcount() {
+		return ecount;
+	}
+	public void setEcount(Integer ecount) {
+		this.ecount = ecount;
+	}
+	public Reply getReply() {
+		return reply;
+	}
+	public void setReply(Reply reply) {
+		this.reply = reply;
+	}
+	public void setCreateTime(LocalDate createTime) {
+		this.createTime = createTime;
 	}
 }

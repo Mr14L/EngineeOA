@@ -8,9 +8,18 @@
 	<mvc:resources location="/WEB-INF/assets/css/" mapping="/assets/css/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/assets/fonts/" mapping="/assets/fonts/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/assets/i/" mapping="/assets/i/**"></mvc:resources>
-	<bean id="viewResolver"
+	<mvc:interceptors>  
+        <mvc:interceptor>  
+            <mvc:mapping path=""/>  
+            <mvc:mapping path=""/>  
+            <mvc:mapping path=""/>  
+            <bean class="com.enginee.interceptor.AuthorInterceptor"></bean>  
+        </mvc:interceptor>  
+    </mvc:interceptors>
+    <bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	 
 </beans>

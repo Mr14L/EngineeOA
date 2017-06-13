@@ -17,6 +17,34 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 </head>
+<script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#button1").click(function(){
+			 $.post("${pageContext.request.contextPath}/exam/updateExam",
+				{"examName":$("#examName").val(),
+				"subjectName": $("#subjectName").val(),
+				"count":$("#count").val(),
+				"place":$("#classroom").val()+":"+$("#roomNumber").val(),
+				"startTime":$("#startTime").val(),
+				"endTime":$("#endTime").val(),
+				"id":$("#id").val()},
+			   function(data){
+						alert("添加成功");
+			});
+		});
+		$("#button2").click(function(){
+			$("#examName").val("");
+			$("#subjectName").val("");
+			$("#count").val("");
+			$("#classroom").val("");
+			$("#roomNumber").val("");
+			$("#startTime").val("");
+			$("#endTime").val("");
+			return;
+		});
+	});
+</script>
 <body>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
@@ -45,21 +73,22 @@
             <div class="am-u-sm-4 am-u-md-2 am-text-right">考试名称</div>
             
             <div class="am-u-sm-8 am-u-md-10">
-             	<input type="text" name="" />
+            	<input type="hidden" id="id" value="${exam.id }">
+             	<input type="text" id="examName" value="${exam.examName }"/>
             </div>
           </div>
           
           <div class="am-g am-margin-top">
             <div class="am-u-sm-4 am-u-md-2 am-text-right">科目名称</div>
             <div class="am-u-sm-8 am-u-md-10">
-             	<input type="text" name="" />
+             	<input type="text" id="subjectName" value="${exam.subjectName }"/>
             </div>
           </div>
           
           <div class="am-g am-margin-top">
             <div class="am-u-sm-4 am-u-md-2 am-text-right">所需人数</div>
             <div class="am-u-sm-8 am-u-md-10">
-             	<input type="number" pattern="[1-9]"  name="" />
+             	<input type="number" pattern="[1-9]"  id="count" value="${exam.count }"/>
             </div>
           </div>
 
@@ -68,14 +97,14 @@
             <div class="am-u-sm-8 am-u-md-10">
               <div class="am-btn-group" data-am-button>
                 <label class="am-btn  am-btn-xs">
-		            <select data-am-selected="{btnSize: 'sm'}">
-		              <option value="1">丹青</option>
-		              <option value="2">锦绣</option>
-		              <option value="3">成栋</option>
+		            <select id="classroom"　data-am-selected="{btnSize: 'sm'}">
+		              <option value="丹青">丹青</option>
+		              <option value="锦绣">锦绣</option>
+		              <option value="成栋">成栋</option>
 		            </select>
                 </label>
                 <label class="am-btn  am-btn-xs">
-			         <input type="number" pattern="[1-9]"  name="" placeholder="门号"/>
+			         <input type="number" id="roomNumber" pattern="[1-9]"  name="" placeholder="门号"/>
                 </label>
               </div>
             </div>
@@ -89,7 +118,7 @@
               <form action="" class="am-form am-form-inline">
                 <div class="am-form-group am-form-icon">
                   <i class="am-icon-calendar"></i>
-                  <input type="datetime-local" class="am-form-field am-input-sm" placeholder="开始时间">
+                  <input type="datetime-local" id="startTime" class="am-form-field am-input-sm" placeholder="开始时间" value="${exam.startTime }">
                 </div>
               </form>
             </div>
@@ -103,7 +132,7 @@
               <form action="" class="am-form am-form-inline">
                 <div class="am-form-group am-form-icon">
                   <i class="am-icon-calendar"></i>
-                  <input type="datetime-local" class="am-form-field am-input-sm" placeholder="结束时间">
+                  <input type="datetime-local" id="endTime" class="am-form-field am-input-sm" placeholder="结束时间" value="${exam.endTime }">
                 </div>
               </form>
             </div>
@@ -199,8 +228,8 @@
     </div>
 
     <div class="am-margin">
-      <button type="button" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
-      <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
+      <button type="button" id="button1" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+      <button type="button" id="button2" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
     </div>
   </div>
 </div>

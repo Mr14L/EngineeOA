@@ -6,14 +6,14 @@
     <session-factory>
         <!-- Database connection settings -->
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1</property>
+        <!-- <property name="connection.pool_size">1</property> -->
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <!-- Enable Hibernate's automatic session context management -->
-        <property name="current_session_context_class">thread</property>
-
+       <!--  <property name="current_session_context_class">thread</property>
+ -->
         <!-- Disable the second-level cache  -->
         <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 

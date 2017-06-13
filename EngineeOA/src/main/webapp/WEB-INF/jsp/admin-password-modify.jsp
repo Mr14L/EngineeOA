@@ -17,6 +17,40 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 </head>
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//判断原密码是否正确
+		$("input[name='oldPassword']").change(function(){
+			if($(this).val()!=$("input[name='oldPassword1']").val()){
+				alert("原密码输入错误，请重新输入！");
+			}
+		});
+		
+		//判断新密码前后是否一致
+		$("#password2").change(function(){
+			if($("#password1").val()!=$(this).val()){
+				alert("前后密码不一致请重新输入！");
+				}
+			});
+		
+		//提交修改
+		$("#button1").click(function(){
+			$.post("${pageContext.request.contextPath}/user/passwordUpdate",{"password":$("input[name='password1']").val()},
+				function(data){
+				alert("修改成功");
+			});
+		});
+		
+		//取消修改
+		$("#button2").click(function(){
+			$("input[name='oldPassword']").val("");
+			$("#password1").val("");
+			$("#password2").val("");
+			return;
+		}); 
+	});
+</script>
 <body>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
@@ -27,7 +61,7 @@
   <div class="admin-content-body">
     <div class="am-cf am-padding am-padding-bottom-0">
       <div class="am-fl am-cf">
-        <strong class="am-text-primary am-text-lg">修改密码</strong> /
+        <strong class="am-text-primary am-text-lg">修改密码</strong> 
         <small>Password</small>
       </div>
     </div>
@@ -45,21 +79,22 @@
             <div class="am-u-sm-4 am-u-md-2 am-text-right">请输入原密码</div>
             
             <div class="am-u-sm-8 am-u-md-10">
-             	<input type="text" name="" />
+            	<input type="hidden" name="oldPassword1" value="${user.password }"/>
+             	<input type="password" name="oldPassword" />
             </div>
           </div>
           
           <div class="am-g am-margin-top">
             <div class="am-u-sm-4 am-u-md-2 am-text-right">请输入新密码</div>
             <div class="am-u-sm-8 am-u-md-10">
-             	<input type="text" name="" />
+             	<input type="password" id="password1" name="password1" />
             </div>
           </div>
           
           <div class="am-g am-margin-top">
             <div class="am-u-sm-4 am-u-md-2 am-text-right">再次输入新密码</div>
             <div class="am-u-sm-8 am-u-md-10">
-             	<input type="text" name=""/>
+             	<input type="password" id="password2" name="password2"/>
             </div>
           </div>
 
@@ -74,8 +109,8 @@
     </div>
 
     <div class="am-margin">
-      <button type="button" class="am-btn am-btn-primary am-btn-xs">确认修改</button>
-      <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃修改</button>
+      <button type="button" id="button1" class="am-btn am-btn-primary am-btn-xs">确认修改</button>
+      <button type="button" id="button2" class="am-btn am-btn-primary am-btn-xs">放弃修改</button>
     </div>
   </div>
 </div>

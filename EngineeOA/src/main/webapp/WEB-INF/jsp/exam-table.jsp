@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -17,6 +18,15 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 </head>
+<script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#button").click(function(){
+			$.post("${pageContext.request.contextPath}/exam/findByExamName",
+					{"examName":$("#examname").val},function(){});
+		});
+	});
+</script>
 <body>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
@@ -38,9 +48,9 @@
         </div>
         <div class="am-u-sm-12 am-u-md-3">
           <div class="am-input-group am-input-group-sm">
-            <input type="text" class="am-form-field">
+            <input id="examname" type="text" class="am-form-field" placeholder="考试名称">
           <span class="am-input-group-btn">
-            <button class="am-btn am-btn-default" type="button">搜索</button>
+            <button id="button" class="am-btn am-btn-default" type="button">搜索</button>
           </span>
           </div>
         </div>
@@ -64,120 +74,27 @@
               </tr>
               </thead>
               <tbody>
+              <c:forEach items="${list}" var="info">
               <tr>
-                <td>1</td>
-                <td>系统设计期末</td>
-                <td>系统设计</td>
-                <td class="am-hide-sm-only">3</td>
-                <td class="am-hide-sm-only">2</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                <td class="am-hide-sm-only">2014年9月5日 7:28:47</td>
-                <td class="am-hide-sm-only">丹青628</td>
+                <td> ${info.id } </td>
+                <td>${info.examName }</td>
+                <td>${info.subjectName }</td>
+                <td class="am-hide-sm-only">${info.count }</td>
+                <td class="am-hide-sm-only">${info.incount}</td>
+                <td class="am-hide-sm-only">${info.startTime }</td>
+                <td class="am-hide-sm-only">${info.endTime }</td>
+                <td class="am-hide-sm-only">${info.place }</td>
                 <td>
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/exam-modify" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-user-apport" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-delete" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
+                      <a href="${pageContext.request.contextPath}/exam/modifyExam/${info.id }" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
+                      <a href="${pageContext.request.contextPath}/exam/apportUser/${info.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
+                      <a href="${pageContext.request.contextPath}/exam/deleteExam/${info.id }" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
                     </div>
                   </div>
                 </td>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>系统设计期末</td>
-                <td>系统设计</td>
-                <td class="am-hide-sm-only">3</td>
-                <td class="am-hide-sm-only">2</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                <td class="am-hide-sm-only">2014年9月5日 7:28:47</td>
-                <td class="am-hide-sm-only">丹青628</td>
-                <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/exam-modify" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-user-apport" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-delete" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>系统设计期末</td>
-                <td>系统设计</td>
-                <td class="am-hide-sm-only">3</td>
-                <td class="am-hide-sm-only">2</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                <td class="am-hide-sm-only">2014年9月5日 7:28:47</td>
-                <td class="am-hide-sm-only">丹青628</td>
-                <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/exam-modify" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-user-apport" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-delete" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>系统设计期末</td>
-                <td>系统设计</td>
-                <td class="am-hide-sm-only">3</td>
-                <td class="am-hide-sm-only">2</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                <td class="am-hide-sm-only">2014年9月5日 7:28:47</td>
-                <td class="am-hide-sm-only">丹青628</td>
-                <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/exam-modify" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-user-apport" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-delete" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>系统设计期末</td>
-                <td>系统设计</td>
-                <td class="am-hide-sm-only">3</td>
-                <td class="am-hide-sm-only">2</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                <td class="am-hide-sm-only">2014年9月5日 7:28:47</td>
-                <td class="am-hide-sm-only">丹青628</td>
-                <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/exam-modify" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-user-apport" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-delete" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>系统设计期末</td>
-                <td>系统设计</td>
-                <td class="am-hide-sm-only">3</td>
-                <td class="am-hide-sm-only">2</td>
-                <td class="am-hide-sm-only">2014年9月4日 7:28:47</td>
-                <td class="am-hide-sm-only">2014年9月5日 7:28:47</td>
-                <td class="am-hide-sm-only">丹青628</td>
-                <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/exam-modify" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-user-apport" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/exam-delete" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
-                    </div>
-                  </div>
-                </td>
-              </tr>
+              </c:forEach>
               </tbody>
             </table>
             <div class="am-cf">

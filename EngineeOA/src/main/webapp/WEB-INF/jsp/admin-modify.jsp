@@ -75,6 +75,19 @@
 </head>
 <body>
 <script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#button2").click(function(){
+			$.post("${pageContext.request.contextPath}/user/userUpdate",
+					{"name":$("input[name='name']").val(),"telephone":$("input[name='telephone']").val(),
+				"qq":$("input[name='qq']").val(),"intro":$("input[name='intro']").val()},
+					function(data){
+					alert("修改成功");
+					return;
+			});
+		});
+	});
+</script>
 <body>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
@@ -103,7 +116,7 @@
                     <div class="am-form-group">
                       <input type="file" id="user-pic">
                       <p class="am-form-help">请选择要上传的文件...</p>
-                      <button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                      <button type="button" id="button1" class="am-btn am-btn-primary am-btn-xs">保存</button>
                     </div>
                   </form>
                 </div>
@@ -139,28 +152,28 @@
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
               <div class="am-u-sm-9">
-                <input type="text" id="user-name" placeholder="姓名 / Name">
+                <input type="text" id="user-name" name="name" placeholder="姓名 / Name">
               </div>
             </div>
             
             <div class="am-form-group">
               <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
               <div class="am-u-sm-9">
-                <input type="email" id="user-email" placeholder="输入你的电子邮件 / Email">
+                <input type="email" id="user-email" name="email" placeholder="${user.email}" readonly>
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
               <div class="am-u-sm-9">
-                <input type="tel" id="user-phone" placeholder="输入你的电话号码 / Telephone">
+                <input type="tel" id="user-phone" name="telephone" placeholder="输入你的电话号码 / Telephone">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
               <div class="am-u-sm-9">
-                <input type="number" pattern="[0-9]*" id="user-QQ" placeholder="输入你的QQ号码">
+                <input type="number" pattern="[0-9]*" id="user-QQ" name="qq" placeholder="输入你的QQ号码">
               </div>
             </div>
 
@@ -168,14 +181,14 @@
             <div class="am-form-group">
               <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
               <div class="am-u-sm-9">
-                <textarea class="" rows="5" id="user-intro" placeholder="输入个人简介"></textarea>
-                <small>250字以内写出你的一生...</small>
+                <textarea class="" rows="5" id="user-intro" name="intro" placeholder="输入个人简介"></textarea>
+                <small></small>
               </div>
             </div>
 
             <div class="am-form-group">
               <div class="am-u-sm-9 am-u-sm-push-3">
-                <button type="button" class="am-btn am-btn-primary">保存修改</button>
+                <button type="button" id="button2" class="am-btn am-btn-primary">保存修改</button>
               </div>
             </div>
           </form>

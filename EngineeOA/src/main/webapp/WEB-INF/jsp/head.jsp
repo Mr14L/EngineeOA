@@ -25,8 +25,8 @@
       $("a").click(function(){
         var ss = $(this).attr("id");
        $("#frame").attr("src",ss);
-      })
-  })
+      });
+  });
   </script>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
@@ -46,7 +46,7 @@
       <!-- <li><a href="javascript:;"><span class="am-icon-envelope-o"></span> 收件箱 <span class="am-badge am-badge-warning">5</span></a></li> -->
       <li class="am-dropdown" data-am-dropdown>
         <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-          <span class="am-icon-users"></span> 教授 <span class="am-icon-caret-down"></span>
+          <span class="am-icon-users"></span> ${user.name} ${user.academic }<span class="am-icon-caret-down"></span>
         </a>
     
       </li>
@@ -76,7 +76,7 @@
           <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-subscript"></span> 监考模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
           <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
             <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/exam/exam-add" class="am-cf"><span class="am-icon-check"></span>添加监考信息<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-            <li><a href="javascript:;" id="${pageContext.request.contextPath}/exam/exam-table"><span class="am-icon-align-left"></span> 监考信息总览</a></li>
+            <li><a href="javascript:;" id="${pageContext.request.contextPath}/exam/listExam"><span class="am-icon-align-left"></span> 监考信息总览</a></li>
           </ul>
         </li>
         
@@ -90,8 +90,8 @@
         </li>
                 <li><a href="javascript:;" id="${pageContext.request.contextPath}/content/admin-author"><span class="am-icon-table"></span> 权限管理</a></li>
                 <li><a href="javascript:;" id="${pageContext.request.contextPath}/user-task/task-user-table"><span class="am-icon-calendar"></span>查看个人任务</a></li>
-        <li><a href="javascript:;" id="${pageContext.request.contextPath}/content/admin-log"><span class="am-icon-calendar"></span> 系统日志</a></li>
-        <li><a href="javascript:;"><span class="am-icon-sign-out"></span> 注销</a></li>
+        <li><a id="" href="javascript:;" id="${pageContext.request.contextPath}/content/admin-log"><span class="am-icon-calendar"></span> 系统日志</a></li>
+        <li><a href="${pageContext.request.contextPath}/login/loginOut"><span class="am-icon-sign-out"></span> 注销</a></li>
       </ul>
 
       <div class="am-panel am-panel-default admin-sidebar-panel">
