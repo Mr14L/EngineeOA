@@ -72,4 +72,10 @@ public class Reply{
 	public void setReplyTime(LocalDateTime replyTime){
 		this.replyTime = replyTime;
 	}
+	public User getTask(){
+		return user;
+	}
+	public void setTask(Task task){
+		this.task = task;
+	}
 }

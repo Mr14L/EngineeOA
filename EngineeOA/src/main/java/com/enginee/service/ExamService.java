@@ -1,23 +1,32 @@
 package com.enginee.service;
 
+
+import java.util.List;
+
 import com.enginee.model.Exam;
+import com.enginee.util.PageModel;
+import com.enginee.util.TransResult;
 
 public interface ExamService {
 
-	String save(Exam exam);
+	TransResult save(Exam exam);
 
-	void update(Exam exam);
+	TransResult update(Exam exam);
 
-	void listExam();
+	List<Exam> listExam();
 
 	Exam findExam(Integer id);
 
-	void deleteExam(Integer id);
+	List<Exam> deleteExam(Integer id, Integer pageNow);
 
-	void findByExamName(String examName);
+	List<Exam> findByExamName(String examName);
 
-	String addExamUser(Integer id, Integer examId);
-	
+	TransResult addExamUser(String id, Integer examId);
+
+	List<Exam> listExamByPage(Integer pageNow);
+
+	PageModel getPage();
+
 	
 	
 	

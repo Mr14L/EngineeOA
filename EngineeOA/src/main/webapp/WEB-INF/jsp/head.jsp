@@ -85,7 +85,7 @@
           <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav3">
             <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/task/task-add" class="am-cf"><span class="am-icon-check"></span>发布回复类任务<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
             <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/task/task-file-add" class="am-cf"><span class="am-icon-list-alt"></span> 发布文件类任务<span class="am-icon-star am-fr am-margin-right "></span></a></li>
-             <li><a href="javascript:;" id="${pageContext.request.contextPath}/task/task-table"><span class="am-icon-align-left"></span>任务完成情况</a></li>
+             <li><a href="javascript:;" id="${pageContext.request.contextPath}/task/listTask"><span class="am-icon-align-left"></span>任务完成情况</a></li>
           </ul>
         </li>
                 <li><a href="javascript:;" id="${pageContext.request.contextPath}/content/admin-author"><span class="am-icon-table"></span> 权限管理</a></li>

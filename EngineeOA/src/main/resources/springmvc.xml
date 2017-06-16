@@ -8,6 +8,8 @@
 	<mvc:resources location="/WEB-INF/assets/css/" mapping="/assets/css/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/assets/fonts/" mapping="/assets/fonts/**"></mvc:resources>
 	<mvc:resources location="/WEB-INF/assets/i/" mapping="/assets/i/**"></mvc:resources>
+	<mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+	<mvc:resources location="/file/" mapping="/file/**"></mvc:resources>
 	<mvc:interceptors>  
         <mvc:interceptor>  
             <mvc:mapping path=""/>  
@@ -21,5 +23,6 @@
 		<property name="prefix" value="/WEB-INF/jsp/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	 
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	 </bean>
 </beans>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js fixed-layout">
 <head>
@@ -31,10 +32,10 @@
       </div>
 
       <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
-        <li><a href="#" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>发布任务数<br/>20</a></li>
-        <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>正在进行任务<br/>5</a></li>
-        <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>过期任务<br/>15</a></li>
-        <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>完成任务次数<br/>3000</a></li>
+        <li><a href="#" class="am-text-success"><span class="am-icon-btn am-icon-file-text"></span><br/>发布任务数<br/> ${taskCount.totalCount}</a></li>
+        <li><a href="#" class="am-text-warning"><span class="am-icon-btn am-icon-briefcase"></span><br/>正在进行任务<br/> ${taskCount.nowCount}</a></li>
+        <li><a href="#" class="am-text-danger"><span class="am-icon-btn am-icon-recycle"></span><br/>过期任务<br/>${taskCount.pastCount }</a></li>
+        <li><a href="#" class="am-text-secondary"><span class="am-icon-btn am-icon-user-md"></span><br/>完成任务次数<br/>${taskCount.finishCount }</a></li>
       </ul>
 
       <div class="am-g">
@@ -51,86 +52,23 @@
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${tasklist }" var="t">
             <tr>
-            <td>1</td>
-            <td><a href="${pageContext.request.contextPath}/task/task-execute" title="查看完成信息">参加志愿者比赛</a></td>
-            <td>文件类</td>
-            <td>2017/6/9</td>
-            <td>2017/7/1</td>
+            <td> ${t.id }</td>
+            <td><a href="${pageContext.request.contextPath}/task/executeTask/${t.id }" title="查看完成信息">${t.title }</a></td>
+            <td>${t.taskType }</td>
+            <td>${t.startTime }</td>
+            <td> ${t.endTime }</td>
               <td>
                 <div class="am-dropdown" data-am-dropdown>
                   <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
                   <ul class="am-dropdown-content">
-                    <li><a href="${pageContext.request.contextPath}/task/task-remove">删除</a></li>
+                    <li><a href="${pageContext.request.contextPath}/task/removeTask/${t.id }">删除</a></li>
                   </ul>
                 </div>
               </td>
             </tr>
-            <tr>
-            <td>1</td>
-            <td><a href="${pageContext.request.contextPath}/task/task-execute" title="查看完成信息">参加志愿者比赛</a></td>
-            <td>文件类</td>
-            <td>2017/6/9</td>
-            <td>2017/7/1</td>
-              <td>
-                <div class="am-dropdown" data-am-dropdown>
-                  <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                  <ul class="am-dropdown-content">
-                    <li><a href="${pageContext.request.contextPath}/task/task-remove">删除</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            
-            <tr>
-            <td>1</td>
-            <td><a href="${pageContext.request.contextPath}/task/task-execute" title="查看完成信息">参加志愿者比赛</a></td>
-            <td>文件类</td>
-            <td>2017/6/9</td>
-            <td>2017/7/1</td>
-              <td>
-                <div class="am-dropdown" data-am-dropdown>
-                  <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                  <ul class="am-dropdown-content">
-                    <li><a href="${pageContext.request.contextPath}/task/task-remove">删除</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            
-            <tr>
-            <td>1</td>
-            <td><a href="${pageContext.request.contextPath}/task/task-execute" title="查看完成信息">参加志愿者比赛</a></td>
-            <td>文件类</td>
-            <td>2017/6/9</td>
-            <td>2017/7/1</td>
-              <td>
-                <div class="am-dropdown" data-am-dropdown>
-                  <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                  <ul class="am-dropdown-content">
-                    <li><a href="${pageContext.request.contextPath}/task/task-remove">删除</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            
-            <tr>
-            <td>1</td>
-            <td><a href="${pageContext.request.contextPath}/task/task-execute" title="查看完成信息">参加志愿者比赛</a></td>
-            <td>文件类</td>
-            <td>2017/6/9</td>
-            <td>2017/7/1</td>
-              <td>
-                <div class="am-dropdown" data-am-dropdown>
-                  <button class="am-btn am-btn-default am-btn-xs am-dropdown-toggle" data-am-dropdown-toggle><span class="am-icon-cog"></span> <span class="am-icon-caret-down"></span></button>
-                  <ul class="am-dropdown-content">
-                    <li><a href="${pageContext.request.contextPath}/task/task-remove">删除</a></li>
-                  </ul>
-                </div>
-              </td>
-            </tr>
-            
-          
+            </c:forEach>
             </tbody>
           </table>
         </div>

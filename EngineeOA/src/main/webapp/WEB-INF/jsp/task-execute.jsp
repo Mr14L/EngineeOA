@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -54,83 +55,46 @@
               <th>操作</th>
             </tr>
             </thead>
-            <tbody>
-            
-            <tr>
-            <td>1</td>
-            <td>王斌</td>
-            <td>正常完成</td>
-            <td>2017/7/1</td>
-              <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/task/task-reply" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
-                      <a href="${pageContext.request.contextPath}/task/task-download" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
+            <tbody><%int i=0; %>
+            <c:forEach items="${ ulist}" var="u">
+            	<tr><%i++; %>
+            	<td><%=i %></td>
+            	<td> ${u.name}</td>
+            	<td>
+            	<c:choose>
+            	<c:when test="${u.reply.replyTime!=null && u.reply.task.id==task.id}">
+            		<c:if test="${u.reply.task.endTime.isAfter(r.replyTime) }">
+            			<c:out value="正常完成"></c:out> 
+            		</c:if> 
+            		<c:if test="${u.reply.task.endTime.isBefore(r.replyTime) }">
+            			<c:out value="超时完成"></c:out> 
+            		</c:if>
+            	</c:when>
+            	<c:otherwise>
+            		<c:out value="未完成"></c:out>
+            	</c:otherwise>
+            	</c:choose> 
+            	</td>
+            	<td> <c:if test="${u.reply.replyTime!=null}"> 
+            		${u.reply.replyTime}
+            		</c:if> 
+            	</td>
+              	<td>
+                  	<div class="am-btn-toolbar">
+                    	<div class="am-btn-group am-btn-group-xs">
+                    	
+                    	<c:if test="${task.taskType=='回复性任务'}">
+                    	<a href="${pageContext.request.contextPath}/task/findReply/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
+                    	</c:if>
+                      	<c:if test="${task.taskType=='文件型任务'}">
+                      	<a href="${pageContext.request.contextPath}/task/task-download/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
+                      	</c:if>
+                      	
                     </div>
                   </div>
                 </td>
             </tr>
-            
-            <tr>
-            <td>1</td>
-            <td>王斌</td>
-            <td>正常完成</td>
-            <td>2017/7/1</td>
-              <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/task/task-reply" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
-                      <a href="${pageContext.request.contextPath}/task/task-download" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
-                    </div>
-                  </div>
-                </td>
-            </tr>
-            
-            <tr>
-            <td>1</td>
-            <td>王斌</td>
-            <td>超时完成</td>
-            <td>2017/7/1</td>
-              <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/task/task-reply" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
-                      <a href="${pageContext.request.contextPath}/task/task-download" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
-                    </div>
-                  </div>
-                </td>
-            </tr>
-            
-            <tr>
-            <td>1</td>
-            <td>王斌</td>
-            <td>未完成</td>
-            <td></td>
-              <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/task/task-reply" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
-                      <a href="${pageContext.request.contextPath}/task/task-download" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
-                    </div>
-                  </div>
-                </td>
-            </tr>
-            
-            <tr>
-            <td>1</td>
-            <td>王斌</td>
-            <td>提前完成</td>
-            <td>2017/7/1</td>
-              <td>
-                  <div class="am-btn-toolbar">
-                    <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/task/task-reply" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
-                      <a href="${pageContext.request.contextPath}/task/task-download" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
-                    </div>
-                  </div>
-                </td>
-            </tr>
-             
+            </c:forEach>
               </tbody>
             </table>
             <div class="am-cf">

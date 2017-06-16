@@ -30,7 +30,12 @@
 				"startTime":$("#startTime").val(),
 				"endTime":$("#endTime").val() },
 			   function(data){
+					if(data.status ==200){
 						alert("添加成功");
+						location.href="${pageContext.request.contextPath}/exam/listExam";
+					}else{
+						alert(data.msg);
+					}
 			});
 		});
 		$("#button2").click(function(){

@@ -38,15 +38,15 @@
             <div class="am-panel-bd">
               <div class="am-g">
                 <div class="am-u-md-4">
-                  <img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
+                  <img class="am-img-circle am-img-thumbnail"  src="${user.headFile }" alt=""/>
                 </div>
                 <div class="am-u-md-8">
-                  <p>你可以使用最喜欢的照片呦 ^^</p>
-                  <form class="am-form">
+                  <p>你可以使用照片呦 ^^ </p>
+                  <form class="am-form" action="${pageContext.request.contextPath}/user/userUpdateHead" method="post"  enctype="multipart/form-data">
                     <div class="am-form-group">
-                      <input type="file" id="user-pic">
+                      <input type="file" id="user-pic" name="file">
                       <p class="am-form-help">请选择要上传的文件...</p>
-                      <button type="button" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                      <button type="submit" class="am-btn am-btn-primary am-btn-xs">保存</button>
                     </div>
                   </form>
                 </div>

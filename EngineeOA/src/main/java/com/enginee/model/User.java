@@ -5,10 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
 
 @Entity
 public class User{
@@ -22,6 +25,7 @@ public class User{
 	//职称
 	private String academic;
 	//权限 用户,管理员,超级管理员
+	@Enumerated(EnumType.STRING)
 	private Author author;
 	//头像文件存放位置
 	private String headFile;
@@ -65,6 +69,7 @@ public class User{
 	public void setAcademic(String academic){
 		this.academic = academic;
 	}
+	@Enumerated(javax.persistence.EnumType.STRING)
 	public Author getAuthor(){
 		return author;
 	}
@@ -104,13 +109,6 @@ public class User{
 	public void setIntro(String intro) {
 		this.intro = intro;
 	}
-	@Override
-	public String toString() {
-		return "User [email=" + email + ", name=" + name + ", telephone=" + telephone + ", password=" + password
-				+ ", qq=" + qq + ", intro=" + intro + ", academic=" + academic + ", author=" + author + ", headFile="
-				+ headFile + ", createTime=" + createTime + ", exams=" + exams + ", tasks=" + tasks + ", reply=" + reply
-				+ "]";
-	}
 	public Integer getEcount() {
 		return ecount;
 	}
@@ -125,5 +123,12 @@ public class User{
 	}
 	public void setCreateTime(LocalDate createTime) {
 		this.createTime = createTime;
+	}
+	@Override
+	public String toString() {
+		return "User [email=" + email + ", name=" + name + ", telephone=" + telephone + ", password=" + password
+				+ ", qq=" + qq + ", intro=" + intro + ", academic=" + academic + ", author=" + author + ", headFile="
+				+ headFile + ", createTime=" + createTime + ", exams=" + exams + ", tasks=" + tasks + ", reply=" + reply
+				+ ", ecount=" + ecount + "]";
 	}
 }

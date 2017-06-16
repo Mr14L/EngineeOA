@@ -82,8 +82,14 @@
 					{"name":$("input[name='name']").val(),"telephone":$("input[name='telephone']").val(),
 				"qq":$("input[name='qq']").val(),"intro":$("input[name='intro']").val()},
 					function(data){
-					alert("修改成功");
-					return;
+					if(data.status == 200){
+						alert("修改成功");
+						location.href="${pageContext.request.contextPath}/content/admin-user";
+					}else{
+						alert("修改失败");
+						return;
+					}
+					
 			});
 		});
 	});
@@ -108,15 +114,15 @@
             <div class="am-panel-bd">
               <div class="am-g">
                 <div class="am-u-md-4">
-                  <img class="am-img-circle am-img-thumbnail" src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/200/h/200/q/80" alt=""/>
+                  <img class="am-img-circle am-img-thumbnail"  src="${user.headFile }" alt=""/>
                 </div>
                 <div class="am-u-md-8">
                   <p>你可以使用照片呦 ^^ </p>
-                  <form class="am-form">
+                  <form class="am-form" action="${pageContext.request.contextPath}/user/userUpdateHead" method="post"  enctype="multipart/form-data">
                     <div class="am-form-group">
-                      <input type="file" id="user-pic">
+                      <input type="file" id="user-pic" name="file">
                       <p class="am-form-help">请选择要上传的文件...</p>
-                      <button type="button" id="button1" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                      <button type="submit" class="am-btn am-btn-primary am-btn-xs">保存</button>
                     </div>
                   </form>
                 </div>

@@ -21,10 +21,21 @@
 <script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
 	$(function(){
-		$("#button").click(function(){
-			$.post("${pageContext.request.contextPath}/exam/findByExamName",
-					{"examName":$("#examname").val},function(){});
+		$("#a").click(function(){
+			if($("#count").html()<=$("#icount").html()){
+				alert("监考人员已满，不需添加");
+				return false;
+			}
+		});	
+		
+		
+		$("#button").mouseover(function(){
+			var str = "${pageContext.request.contextPath}/exam/findByExamName?examName="+$("#examname").val();
+			$("#button").attr("href", str);
+			
 		});
+		var pageNow = 1;
+		
 	});
 </script>
 <body>
@@ -50,7 +61,8 @@
           <div class="am-input-group am-input-group-sm">
             <input id="examname" type="text" class="am-form-field" placeholder="考试名称">
           <span class="am-input-group-btn">
-            <button id="button" class="am-btn am-btn-default" type="button">搜索</button>
+          <a id="button" class="am-btn am-btn-default"
+           href="#" >搜索</a>
           </span>
           </div>
         </div>
@@ -65,10 +77,10 @@
                 <th class="table-id">ID</th>
                 <th class="table-type">考试名称</th>
                 <th class="table-type">考试科目</th>
-                <th class="table-type">所需人数</th>
-                <th class="table-type">实际人数</th>
-                 <th class="table-date am-hide-sm-only">开始时间</th>
-                  <th class="table-date am-hide-sm-only">结束时间</th>
+                <th  class="table-type">所需人数</th>
+                <th  class="table-type">实际人数</th>
+                <th class="table-date am-hide-sm-only">开始时间</th>
+                <th class="table-date am-hide-sm-only">结束时间</th>
                 <th class="table-author">地点</th>
                 <th class="table-set">操作</th>
               </tr>
@@ -79,8 +91,8 @@
                 <td> ${info.id } </td>
                 <td>${info.examName }</td>
                 <td>${info.subjectName }</td>
-                <td class="am-hide-sm-only">${info.count }</td>
-                <td class="am-hide-sm-only">${info.incount}</td>
+                <td id="count" class="am-hide-sm-only">${info.count }</td>
+                <td id="icount" class="am-hide-sm-only">${info.incount}</td>
                 <td class="am-hide-sm-only">${info.startTime }</td>
                 <td class="am-hide-sm-only">${info.endTime }</td>
                 <td class="am-hide-sm-only">${info.place }</td>
@@ -88,8 +100,8 @@
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
                       <a href="${pageContext.request.contextPath}/exam/modifyExam/${info.id }" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>修改</a>
-                      <a href="${pageContext.request.contextPath}/exam/apportUser/${info.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
-                      <a href="${pageContext.request.contextPath}/exam/deleteExam/${info.id }" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
+                      <a id="a" href="${pageContext.request.contextPath}/exam/apportUser/${info.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>分配人员</a>
+                      <a href="${pageContext.request.contextPath}/exam/deleteExam?id=${info.id }&pageNow=${page.pageNow}" class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only"><span class="am-icon-trash-o"></span> 删除</a>
                     </div>
                   </div>
                 </td>
@@ -98,21 +110,19 @@
               </tbody>
             </table>
             <div class="am-cf">
-              共 15 条记录
+              共  ${page.pageCount} 页          当前页为 第 ${page.pageNow}页 
               <div class="am-fr">
                 <ul class="am-pagination">
                   <li class="am-disabled"><a href="#">«</a></li>
-                  <li class="am-active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
+                  <li class="am-active"><a href="${pageContext.request.contextPath}/exam/listExam">第一页</a></li>
+                  <li><a href="${pageContext.request.contextPath}/exam/toPage/${page.pageNow-1}">上一页</a></li>
+                  <li><a href="${pageContext.request.contextPath}/exam/toPage/${page.pageNow+1}">下一页</a></li>
+                  <li><a href="${pageContext.request.contextPath}/exam/toPage/${page.pageCount}">最后一页</a></li>
                   <li><a href="#">»</a></li>
                 </ul>
               </div>
             </div>
             <hr />
-            <p>注：.....</p>
           </form>
         </div>
 

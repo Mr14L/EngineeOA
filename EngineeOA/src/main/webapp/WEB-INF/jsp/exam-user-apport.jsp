@@ -20,11 +20,22 @@
 </head>
 <script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
 <script type="text/javascript">
-<script type="text/javascript">
 $(function(){
-	$("#button").click(function(){
-		$.post("${pageContext.request.contextPath}/exam/findByUserName",
-				{"examName":$("#examname").val},function(){});
+	$("#a").click(function(){
+		$.post("${pageContext.request.contextPath}/exam/examApportAdd",{"id":$("#email").html(),"examId":$("#hidden").val()},
+				function(data){
+				if(data.status ==200){
+					location.href="${pageContext.request.contextPath}/exam/listExam";
+				}else{
+					alert("添加失败");
+					return;
+				}
+		});
+		$("#button").mouseover(function(){
+			var str = "${pageContext.request.contextPath}/user/findByUserName?name="+$("#username").val();
+			$("#button").attr("href", str);
+			
+		});
 	});
 });
 </script>
@@ -51,9 +62,9 @@ $(function(){
         </div>
         <div class="am-u-sm-12 am-u-md-3">
           <div class="am-input-group am-input-group-sm">
-            <input type="text" class="am-form-field" placeholder="输入姓名">
+            <input id="username" type="text" class="am-form-field" placeholder="输入姓名">
           <span class="am-input-group-btn">
-            <button id="button" class="am-btn am-btn-default" type="button" >搜索</button>
+          	<a href="#" id="button" class="am-btn am-btn-default">搜索</a>
           </span>
           </div>
         </div>
@@ -61,6 +72,7 @@ $(function(){
 
 <div class="am-g">
         <div class="am-u-sm-12">
+        <input id="hidden" type="hidden" value="${examId }">
           <table class="am-table am-table-bd am-table-striped admin-content-table">
             <thead>
             <tr>
@@ -73,17 +85,18 @@ $(function(){
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="userList" var="u">
-            <tr>
-            <td>${u.id }</td>
+            <%int i=0; %>
+            <c:forEach items="${userList }" var="u">
+            <tr><%i++; %>
+            <td><%=i %></td>
             <td>${u.name }</td> 
-            <td>${u.email }</td>
+            <td id="email">${u.email }</td>
             <td>${ u.telephone }</td>
             <td> ${u.ecount} </td>
              <td>
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/exam/examApportAdd?id=${u.id}&examId=${examId}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-paperclip"></span>添加</a>
+                      <a id="a" href="#"><span class="am-icon-paperclip">添加</span></a>
                     </div>
                   </div>
                 </td>

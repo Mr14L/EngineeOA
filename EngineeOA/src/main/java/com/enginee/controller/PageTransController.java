@@ -28,13 +28,18 @@ public final class PageTransController{
 		return "exam-add";
 	}
 	@RequestMapping("/exam/exam-modify")
-	public String toTargetPage5(){
+	public String toTargetPage6(){
 		return "exam-modify";
 	}
-	@RequestMapping("/task/{page}")
-	public String toTargetPage3(@PathVariable String page) {
-		return page;
+	@RequestMapping("/task/task-add")
+	public String toTargetPage3() {
+		return "task-add";
 	}
+	@RequestMapping("/task/task-file-add")
+	public String toTargetPage5() {
+		return "task-file-add";
+	}
+	
 	@RequestMapping("/user-task/{page}")
 	public String toTargetPage4(@PathVariable String page) {
 		return page;

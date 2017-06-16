@@ -17,6 +17,39 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin.css">
 </head>
+<script src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#title").change(function(){
+			 $.post("${pageContext.request.contextPath}/task/findTaskByTitle",
+						{"title":$(this).val()},function(data){
+							if(data.status!=200){
+								alert(data.msg);
+							}
+						});
+		});
+		$("#button1").click(function(){
+			 $.post("${pageContext.request.contextPath}/task/addReplyTask",
+				{"title":$("#title").val(),
+				"content": $("#content").val(),
+				"startTime":$("#taskstarttime").val(),
+				"endTime":$("#taskendtime").val()},
+			   function(data){
+					if(data.status ==200){
+						alert("添加成功");
+						location.href="${pageContext.request.contextPath}/task/listTask";
+					} 
+			});
+		});
+		$("#button2").click(function(){
+			 $("#title").val("");
+			 $("#content").val("");
+			 $("#taskstarttime").val("");
+			 $("#taskendtime").val("");
+			return;
+		});
+	});
+</script>
 <body>
 <!--[if lte IE 9]>
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
@@ -48,7 +81,7 @@
                 	任务标题
               </div>
               <div class="am-u-sm-8 am-u-md-4">
-                <input type="text" class="am-input-sm">
+                <input type="text" id="title" class="am-input-sm">
               </div>
               <div class="am-hide-sm-only am-u-md-6">*必填，不可重复</div>
             </div>
@@ -63,7 +96,7 @@
                 内容描述
               </div>
               <div class="am-u-sm-12 am-u-md-10">
-                <textarea rows="10" placeholder="请输入内容"></textarea>
+                <textarea rows="10" placeholder="请输入内容" id="content"></textarea>
               </div>
             </div>
 
@@ -79,7 +112,7 @@
               <form action="" class="am-form am-form-inline">
                 <div class="am-form-group am-form-icon">
                   <i class="am-icon-calendar"></i>
-                  <input type="datetime-local" class="am-form-field am-input-sm" placeholder="开始时间">
+                  <input id="taskstarttime" type="datetime-local" class="am-form-field am-input-sm" placeholder="开始时间">
                 </div>
               </form>
             </div>
@@ -93,7 +126,7 @@
               <form action="" class="am-form am-form-inline">
                 <div class="am-form-group am-form-icon">
                   <i class="am-icon-calendar"></i>
-                  <input type="datetime-local" class="am-form-field am-input-sm" placeholder="结束时间">
+                  <input id="taskendtime"type="datetime-local" class="am-form-field am-input-sm" placeholder="结束时间">
                 </div>
               </form>
             </div>
@@ -104,8 +137,8 @@
 
 
     <div class="am-margin">
-      <button type="button" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
-      <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
+      <button type="button" id="button1" class="am-btn am-btn-primary am-btn-xs">提交保存</button>
+      <button type="button" id="button2" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>
     </div>
   </div>
 
