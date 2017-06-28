@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +22,7 @@ import com.enginee.dao.UserDao;
 import com.enginee.model.Author;
 import com.enginee.model.User;
 import com.enginee.service.UserService;
+import com.enginee.util.PageModel;
 import com.enginee.util.TransResult;
 @Service
 public class UserServiceImpl implements UserService{
@@ -121,7 +123,6 @@ public class UserServiceImpl implements UserService{
 			httpSession.setAttribute("user", u);
 		}
 	}
-	@Override
 	@Transactional
 	public List<User> listUserByAuther() {
 		// TODO Auto-generated method stub
@@ -132,6 +133,68 @@ public class UserServiceImpl implements UserService{
 		@SuppressWarnings("unchecked")
 		List<User> list =query.getResultList();
 		return list;
+	}
+	@Override
+	@Transactional
+	public PageModel listByPage(int pageNow){
+		List<User> list=this.listUserByAuther();
+		PageModel page = new PageModel();
+		page.setRowCount(list.size());
+		if(list.size()%5==0){
+			page.setPageCount(list.size()/5);
+		}else{
+			page.setPageCount((list.size()/5)+1);
+		}
+		if(pageNow>0 && pageNow <=page.getPageCount()){
+			if(pageNow<page.getPageCount()){
+					page.setList(list.subList((pageNow-1)*5, pageNow*5-1));
+			}else{
+					page.setList(list.subList((pageNow-1)*5, list.size()-1));
+			}
+			page.setPageNow(pageNow);
+			}else{
+				page.setList(list.subList(0, (list.size()>5?4:list.size()-1)));
+				page.setPageNow(1);
+			}	
+		return page;
+	}
+	@Override
+	@Transactional
+	public void remove(String email) {
+		// TODO Auto-generated method stub
+		User user = userDao.find(email);
+		userDao.remove(user);
+	}
+	@Override
+	@Transactional
+	public void updateAuthor(String email) {
+		// TODO Auto-generated method stub
+		User user = userDao.find(email);
+		user.setAuthor(Author.ADMIN);
+		userDao.merge(user);
+		}
+	@Override
+	@Transactional
+	public void updateAcademic(String email, String academic) {
+		// TODO Auto-generated method stub
+		User user = userDao.find(email);
+		user.setAcademic(academic);
+		userDao.merge(user);
+	}
+	@Override
+	@Transactional
+	public TransResult addUser(User user) {
+		User u =userDao.find(user.getEmail());
+		if(u !=null) return TransResult.build(400, "邮箱重复，请更换邮箱");
+		try{
+			user.setPassword(DigestUtils.md5DigestAsHex(user.getEmail().getBytes()));
+			user.setAuthor(Author.USER);
+			userDao.merge(user);
+		}catch(Exception e){
+			e.printStackTrace();
+			return TransResult.build(500, "服务器错误");
+		}
+		return TransResult.ok();
 	}
 
 }

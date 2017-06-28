@@ -80,7 +80,7 @@
 		$("#button2").click(function(){
 			$.post("${pageContext.request.contextPath}/user/userUpdate",
 					{"name":$("input[name='name']").val(),"telephone":$("input[name='telephone']").val(),
-				"qq":$("input[name='qq']").val(),"intro":$("input[name='intro']").val()},
+				"qq":$("input[name='qq']").val(),"intro":$("textarea[name='intro']").val()},
 					function(data){
 					if(data.status == 200){
 						alert("修改成功");
@@ -158,28 +158,28 @@
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
               <div class="am-u-sm-9">
-                <input type="text" id="user-name" name="name" placeholder="姓名 / Name">
+                <input type="text" id="user-name" name="name" value="${user.name }">
               </div>
             </div>
             
             <div class="am-form-group">
               <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
               <div class="am-u-sm-9">
-                <input type="email" id="user-email" name="email" placeholder="${user.email}" readonly>
+                <input type="email" id="user-email" name="email" value="${user.email}" readonly>
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
               <div class="am-u-sm-9">
-                <input type="tel" id="user-phone" name="telephone" placeholder="输入你的电话号码 / Telephone">
+                <input type="tel" id="user-phone" name="telephone" value="${user.telephone }">
               </div>
             </div>
 
             <div class="am-form-group">
               <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
               <div class="am-u-sm-9">
-                <input type="number" pattern="[0-9]*" id="user-QQ" name="qq" placeholder="输入你的QQ号码">
+                <input type="number" pattern="[0-9]*" id="user-QQ" name="qq" value="${user.qq }">
               </div>
             </div>
 
@@ -187,7 +187,7 @@
             <div class="am-form-group">
               <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
               <div class="am-u-sm-9">
-                <textarea class="" rows="5" id="user-intro" name="intro" placeholder="输入个人简介"></textarea>
+                <textarea class="" rows="5" id="user-intro" name="intro" >${user.intro}</textarea>
                 <small></small>
               </div>
             </div>

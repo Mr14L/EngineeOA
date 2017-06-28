@@ -19,10 +19,10 @@ public final class PageTransController{
 	public String toTargetPage(@PathVariable String page) {
 		return page;
 	}
-	@RequestMapping("/user/{page}")
+	/*@RequestMapping("/user/user-info")
 	public String toTargetPage1(@PathVariable String page) {
 		return page;
-	}
+	}*/
 	@RequestMapping("/exam/exam-add")
 	public String toTargetPage2(){
 		return "exam-add";
@@ -40,8 +40,8 @@ public final class PageTransController{
 		return "task-file-add";
 	}
 	
-	@RequestMapping("/user-task/{page}")
+	/*@RequestMapping("/user-task/toTaskUserTable")
 	public String toTargetPage4(@PathVariable String page) {
 		return page;
-	}
+	}*/
 }

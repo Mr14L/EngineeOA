@@ -1,5 +1,9 @@
 package com.enginee.util;
 
+import java.util.List;
+
+import com.enginee.model.User;
+
 public class PageModel {
 	//每页显示的记录数
 	private Integer pageSize = 5;
@@ -9,6 +13,8 @@ public class PageModel {
 	private Integer rowCount;
 	//显示第几页
 	private Integer pageNow;
+	
+	private List<User> list;
 	public Integer getPageCount() {
 		return pageCount;
 	}
@@ -29,6 +35,12 @@ public class PageModel {
 	}
 	public Integer getPageSize() {
 		return pageSize;
+	}
+	public List<User> getList() {
+		return list;
+	}
+	public void setList(List<User> list) {
+		this.list = list;
 	}
 	
 }

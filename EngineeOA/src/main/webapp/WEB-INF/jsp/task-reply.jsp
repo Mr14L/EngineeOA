@@ -49,7 +49,7 @@
                     <header class="am-comment-hd">
                       <div class="am-comment-meta"><a href="#" class="am-comment-author">李若楠</a> 回复于 <time>2017-6-9 15:30</time></div>
                     </header>
-                    <div class="am-comment-bd"><p>有时间我一定陪你去大保健,我带着你 ,你带着爸爸</p>
+                    <div class="am-comment-bd"><p>有时间我一定陪你去师大夜市,我带着你 ,你带着爸爸</p>
                     </div>
                   </div>
                 </li>

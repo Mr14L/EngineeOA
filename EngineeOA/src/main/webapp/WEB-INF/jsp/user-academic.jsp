@@ -22,7 +22,25 @@
 <p class="browsehappy">你正在使用<strong>过时</strong>的浏览器，Amaze UI 暂不支持。 请 <a href="http://browsehappy.com/" target="_blank">升级浏览器</a>
   以获得更好的体验！</p>
 <![endif]-->
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/assets/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#button").click(function(){
+			$.post("${pageContext.request.contextPath}/user/updateAcademic",
+					{"email":$("input[name='email']").val(),"academic":$("input[name='academic']").val()},
+					function(data){
+					if(data.status == 200){
+						alert("添加成功");
+						location.href="${pageContext.request.contextPath}/user/userList";
+					}else{
+						alert(data.msg);
+						return;
+					}
+					
+			});
+		});
+	});
+</script>
 
       <div class="admin-content">
     <div class="admin-content-body">
@@ -40,7 +58,7 @@
         </div>
 
         <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
-          <form class="am-form am-form-horizontal">
+          <form class="am-form am-form-horizontal" action="${pageContext.request.contextPath}/user/updateAcademic" method="post">
             <div class="am-form-group">
               <label for="user-name" class="am-u-sm-3 am-form-label" >姓名 / Name</label>
                 <label  for="user-name" class="am-u-sm-3 am-form-label"> ${u.name}</label>
@@ -51,42 +69,23 @@
             
             <div class="am-form-group">
               <label for="user-zhicheng" class="am-u-sm-3 am-form-label">职称 / Academic</label>
-               <label for="user-zhicheng" class="am-u-sm-3 am-form-label">${u.academic}</label>
+               <input type="text" name="academic" value="${u.academic}">
               <div class="am-u-sm-9">
               </div>
             </div>
  			 <hr/>
             <div class="am-form-group">
               <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
-              <label for="user-email" class="am-u-sm-5 am-form-label">${u.email}</label>
+              <input type="text" name="email" class="am-u-sm-5 am-form-label" readonly value="${u.email}"/>
               <div class="am-u-sm-6">
               </div>
             </div>
 			  <hr/>
-            <div class="am-form-group">
-              <label for="user-phone" class="am-u-sm-3 am-form-label">电话 / Telephone</label>
-              <label for="user-phone" class="am-u-sm-4 am-form-label">${u.telephone}</label>
-              <div class="am-u-sm-6">
-              </div>
-            </div>
-			  <hr/>
-            <div class="am-form-group">
-              <label for="user-QQ" class="am-u-sm-3 am-form-label">QQ</label>
-              <label for="user-QQ" class="am-u-sm-4 am-form-label">${u.qq}</label>
-              <div class="am-u-sm-7">
-              </div>
-            </div>
-			  <hr/>
-            <div class="am-form-group">
-              <label for="user-intro" class="am-u-sm-3 am-form-label">简介 / Intro</label>
-              <label for="user-intro" class="am-u-sm-4 am-form-label">${u.intro}</label>
-              <div class="am-u-sm-8">
-	              </div>
-              </div>
             </div>
 			  <hr/>
             <div class="am-form-group">
               <div class="am-u-sm-9 am-u-sm-push-3">
+              <button  type="button" id="button">保存</button>
               </div>
             </div>
           </form>

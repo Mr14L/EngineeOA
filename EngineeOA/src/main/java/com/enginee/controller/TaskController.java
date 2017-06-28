@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.enginee.model.Task;
-import com.enginee.model.User;
 import com.enginee.service.TaskService;
 import com.enginee.service.UserService;
+import com.enginee.util.PageModel;
 import com.enginee.util.TransResult;
 
 /**
@@ -71,10 +71,20 @@ public class TaskController {
 	//查看任务
 	@RequestMapping("/executeTask/{id}")
 	public String executeTask(@PathVariable Integer id,Model model){
-		List<User> userlist = userService.listUserByAuther();
+		PageModel page= userService.listByPage(1);
 		Task task = taskService.findById(id);
-		model.addAttribute("ulist",userlist);
+		model.addAttribute("page",page);
 		model.addAttribute("task", task);
 		return "task-execute";
 	}
+	
+	//查看任务
+		@RequestMapping("/toPage")
+		public String toPage(Integer pagenow, Integer id,Model model){
+			PageModel page= userService.listByPage(pagenow);
+			Task task = taskService.findById(id);
+			model.addAttribute("page",page);
+			model.addAttribute("task", task);
+			return "task-execute";
+		}
 }

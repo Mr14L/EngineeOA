@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!doctype html>
 <html class="no-js fixed-layout">
 <head>
@@ -44,22 +45,26 @@
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${tlist}" var="t">
+           
             <tr>
-            <td>1</td>
-            <td><a href="${pageContext.request.contextPath}/task/task-execute" title="查看完成信息">参加志愿者比赛</a></td>
-            <td>文件类</td>
-            <td>2017/6/9</td>
-            <td>2017/7/1</td>
+            <td> ${t.id}</td>
+            <td> ${t.title}</td>
+            <td> ${t.taskType}</td>
+            <td>${t.startTime}</td>
+            <td>${t.endTime}</td>
                <td>
                   <div class="am-btn-toolbar">
                     <div class="am-btn-group am-btn-group-xs">
-                      <a href="${pageContext.request.contextPath}/user-task/task-user-reply" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>去完成</a>
+                      <a href="${pageContext.request.contextPath}/user-task/taskUserReply/${t.id}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>去完成</a>
+                      <c:if test="${t.taskType=='文件型任务'}">
                       <a href="${pageContext.request.contextPath}/user-task/task-user-download" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-download"></span>下载</a>
+                    </c:if>
                     </div>
                   </div>
                 </td>
             </tr>
-           
+            </c:forEach>
             
           
             </tbody>

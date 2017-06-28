@@ -56,17 +56,17 @@
             </tr>
             </thead>
             <tbody><%int i=0; %>
-            <c:forEach items="${ ulist}" var="u">
+            <c:forEach items="${page.list}" var="u">
             	<tr><%i++; %>
             	<td><%=i %></td>
             	<td> ${u.name}</td>
             	<td>
             	<c:choose>
             	<c:when test="${u.reply.replyTime!=null && u.reply.task.id==task.id}">
-            		<c:if test="${u.reply.task.endTime.isAfter(r.replyTime) }">
+            		<c:if test="${u.reply.task.endTime.isAfter(u.reply.replyTime) }">
             			<c:out value="正常完成"></c:out> 
             		</c:if> 
-            		<c:if test="${u.reply.task.endTime.isBefore(r.replyTime) }">
+            		<c:if test="${u.reply.task.endTime.isBefore(u.reply.replyTime) }">
             			<c:out value="超时完成"></c:out> 
             		</c:if>
             	</c:when>
@@ -84,7 +84,7 @@
                     	<div class="am-btn-group am-btn-group-xs">
                     	
                     	<c:if test="${task.taskType=='回复性任务'}">
-                    	<a href="${pageContext.request.contextPath}/task/findReply/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
+                    	<a href="${pageContext.request.contextPath}/user-task/findReply/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
                     	</c:if>
                       	<c:if test="${task.taskType=='文件型任务'}">
                       	<a href="${pageContext.request.contextPath}/task/task-download/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
@@ -98,21 +98,19 @@
               </tbody>
             </table>
             <div class="am-cf">
-              共 15 条记录
+                共  ${page.pageCount} 页          当前页为 第 ${page.pageNow}页 
               <div class="am-fr">
                 <ul class="am-pagination">
                   <li class="am-disabled"><a href="#">«</a></li>
-                  <li class="am-active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
+                  <li class="am-active"><a href="${pageContext.request.contextPath}/task/executeTask/${task.id }">第一页</a></li>
+                  <li><a href="${pageContext.request.contextPath}/task/toPage?pagenow=${page.pageNow-1}&&id=${task.id}">上一页</a></li>
+                  <li><a href="${pageContext.request.contextPath}/task/toPage?pagenow=${page.pageNow+1}&&id=${task.id}">下一页</a></li>
+                  <li><a href="${pageContext.request.contextPath}/task/toPage?pagenow=${page.pageCount}&&id=${task.id}">最后一页</a></li>
                   <li><a href="#">»</a></li>
                 </ul>
               </div>
             </div>
             <hr />
-            <p>注：.....</p>
         </div>
 
       </div>

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.enginee.model.User;
+import com.enginee.util.PageModel;
 import com.enginee.util.TransResult;
 
 public interface UserService{
@@ -22,6 +23,14 @@ public interface UserService{
 
 	void updateUserHead(MultipartFile file)throws IllegalStateException, IOException ;
 
-	List<User> listUserByAuther();
+	PageModel listByPage(int i);
+
+	void remove(String email);
+
+	void updateAuthor(String email);
+
+	void updateAcademic(String email, String academic);
+
+	TransResult addUser(User user);
 
 }

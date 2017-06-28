@@ -115,20 +115,13 @@ public class User{
 	public void setEcount(Integer ecount) {
 		this.ecount = ecount;
 	}
+	public void setCreateTime(LocalDate createTime) {
+		this.createTime = createTime;
+	}
 	public Reply getReply() {
 		return reply;
 	}
 	public void setReply(Reply reply) {
 		this.reply = reply;
-	}
-	public void setCreateTime(LocalDate createTime) {
-		this.createTime = createTime;
-	}
-	@Override
-	public String toString() {
-		return "User [email=" + email + ", name=" + name + ", telephone=" + telephone + ", password=" + password
-				+ ", qq=" + qq + ", intro=" + intro + ", academic=" + academic + ", author=" + author + ", headFile="
-				+ headFile + ", createTime=" + createTime + ", exams=" + exams + ", tasks=" + tasks + ", reply=" + reply
-				+ ", ecount=" + ecount + "]";
 	}
 }

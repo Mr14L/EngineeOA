@@ -88,9 +88,9 @@
              <li><a href="javascript:;" id="${pageContext.request.contextPath}/task/listTask"><span class="am-icon-align-left"></span>任务完成情况</a></li>
           </ul>
         </li>
-                <li><a href="javascript:;" id="${pageContext.request.contextPath}/content/admin-author"><span class="am-icon-table"></span> 权限管理</a></li>
-                <li><a href="javascript:;" id="${pageContext.request.contextPath}/user-task/task-user-table"><span class="am-icon-calendar"></span>查看个人任务</a></li>
-        <li><a id="" href="javascript:;" id="${pageContext.request.contextPath}/content/admin-log"><span class="am-icon-calendar"></span> 系统日志</a></li>
+                <li><a href="javascript:;" id="${pageContext.request.contextPath}/user/userList"><span class="am-icon-table"></span> 权限管理</a></li>
+                <li><a href="javascript:;" id="${pageContext.request.contextPath}/user-task/toTaskUserTable"><span class="am-icon-calendar"></span>查看个人任务</a></li>
+       			<li><a href="javascript:;" id="${pageContext.request.contextPath}/log/toLogPage"><span class="am-icon-calendar"></span> 系统日志</a></li>
         <li><a href="${pageContext.request.contextPath}/login/loginOut"><span class="am-icon-sign-out"></span> 注销</a></li>
       </ul>
 

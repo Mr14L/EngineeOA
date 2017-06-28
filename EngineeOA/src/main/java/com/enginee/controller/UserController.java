@@ -50,4 +50,67 @@ public class UserController {
 		userService.updateUserHead(file);
 		return "admin-user";
 	}
+	
+	//列出所有user
+	@RequestMapping("/userList")
+	public String userList(Model model){
+		List<User> list = userService.listUser();
+		model.addAttribute("list",list );
+		return "admin-author";
+	}
+	//查看详细信息
+	@RequestMapping("/userInfo")
+	public String userInfo(String name,Model model) throws UnsupportedEncodingException{
+		name = new String(name.getBytes("iso-8859-1"),"utf-8");
+		User user = userService.findByName(name).get(0);
+		model.addAttribute("u",user);
+		return "user-info";
+		}
+	//单条更新
+	@RequestMapping("/updateAcademic")
+	@ResponseBody
+	public TransResult updateAcademic(String email,String academic,Model model) throws UnsupportedEncodingException{
+		try{
+			userService.updateAcademic(email,academic);
+		}catch(Exception e){
+			e.printStackTrace();
+			return TransResult.build(400, "更新失败");
+		}
+		return TransResult.build(200, "更新成功");
+	}
+	//单条删除 
+	@RequestMapping("/removeUser")
+	public String removeUser(String email,Model model) throws UnsupportedEncodingException{
+		email = new String(email.getBytes("iso-8859-1"),"utf-8");
+		userService.remove(email);
+		return "forward:/user/userList";
+	}
+	//设为管理 
+	@RequestMapping("/updateAuthor")
+	public String updateAuthor(String email,Model model) throws UnsupportedEncodingException{
+		email = new String(email.getBytes("iso-8859-1"),"utf-8");
+		userService.updateAuthor(email);
+		return "forward:/user/userList";
+	}
+	
+	//添加用户
+	@RequestMapping("/addUser")
+	public String addUser(){
+		return "user-add";
+	}
+	//添加用户实现
+	@RequestMapping("/addUser2")
+	@ResponseBody
+	public TransResult toAdd(User user){
+		TransResult tr = userService.addUser(user);
+		return tr;
+	}
+	//修改职称
+	@RequestMapping("/toAcademic")
+	public String toAcademic(String name,Model model) throws UnsupportedEncodingException{
+		name = new String(name.getBytes("iso-8859-1"),"utf-8");
+		User user= userService.findByName(name).get(0);
+		model.addAttribute("u",user);
+		return "user-academic";
+	}
 }
