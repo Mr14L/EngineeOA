@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -71,28 +72,34 @@
             <li><a href="javascript:;" id="${pageContext.request.contextPath}/content/admin-gallery"><span class="am-icon-th"></span> 相册页面<span class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
           </ul>
         </li>
-        
-        <li class="admin-parent">
-          <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-subscript"></span> 监考模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
-            <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/exam/exam-add" class="am-cf"><span class="am-icon-check"></span>添加监考信息<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-            <li><a href="javascript:;" id="${pageContext.request.contextPath}/exam/listExam"><span class="am-icon-align-left"></span> 监考信息总览</a></li>
-          </ul>
-        </li>
-        
-         <li class="admin-parent">
-          <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><span class="am-icon-columns"></span> 任务模块<span class="am-icon-angle-right am-fr am-margin-right"></span></a>
-          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav3">
-            <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/task/task-add" class="am-cf"><span class="am-icon-check"></span>发布回复类任务<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
-            <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/task/task-file-add" class="am-cf"><span class="am-icon-list-alt"></span> 发布文件类任务<span class="am-icon-star am-fr am-margin-right "></span></a></li>
-             <li><a href="javascript:;" id="${pageContext.request.contextPath}/task/listTask"><span class="am-icon-align-left"></span>任务完成情况</a></li>
-          </ul>
-        </li>
+        <c:if test="${user.author eq 'ADMIN' || user.author eq 'SUPERADMIN'}">
+	        <li class="admin-parent">
+	          <a class="am-cf" data-am-collapse="{target: '#collapse-nav2'}"><span class="am-icon-subscript"></span> 监考模块 <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+	          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav2">
+	            <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/exam/exam-add" class="am-cf"><span class="am-icon-check"></span>添加监考信息<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+	            <li><a href="javascript:;" id="${pageContext.request.contextPath}/exam/listExam"><span class="am-icon-align-left"></span> 监考信息总览</a></li>
+	          </ul>
+	        </li>
+        </c:if>
+        <c:if test="${user.author eq 'ADMIN' || user.author eq 'SUPERADMIN'}">
+	        <li class="admin-parent">
+	          <a class="am-cf" data-am-collapse="{target: '#collapse-nav3'}"><span class="am-icon-columns"></span> 任务模块<span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+	          <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav3">
+	            <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/task/task-add" class="am-cf"><span class="am-icon-check"></span>发布回复类任务<span class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+	            <li><a  href="javascript:;"  id="${pageContext.request.contextPath}/task/task-file-add" class="am-cf"><span class="am-icon-list-alt"></span> 发布文件类任务<span class="am-icon-star am-fr am-margin-right "></span></a></li>
+	             <li><a href="javascript:;" id="${pageContext.request.contextPath}/task/listTask"><span class="am-icon-align-left"></span>任务完成情况</a></li>
+	          </ul>
+	        </li>
+        </c:if>
+        <c:if test="${user.author eq 'SUPERADMIN'}">
                 <li><a href="javascript:;" id="${pageContext.request.contextPath}/user/userList"><span class="am-icon-table"></span> 权限管理</a></li>
+        </c:if>
                 <li><a href="javascript:;" id="${pageContext.request.contextPath}/user-task/toTaskUserTable"><span class="am-icon-calendar"></span>查看个人任务</a></li>
-       			<li><a href="javascript:;" id="${pageContext.request.contextPath}/log/toLogPage"><span class="am-icon-calendar"></span> 系统日志</a></li>
+       <c:if test="${user.author eq 'SUPERADMIN'}">
+				<li><a href="javascript:;" id="${pageContext.request.contextPath}/log/toLogPage"><span class="am-icon-calendar"></span> 系统日志</a></li>
+		</c:if>
         <li><a href="${pageContext.request.contextPath}/login/loginOut"><span class="am-icon-sign-out"></span> 注销</a></li>
-      </ul>
+    </ul>
 
       <div class="am-panel am-panel-default admin-sidebar-panel">
         <div class="am-panel-bd">

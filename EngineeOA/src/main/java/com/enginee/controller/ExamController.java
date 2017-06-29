@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.enginee.model.Exam;
+import com.enginee.model.MyAuthority;
+import com.enginee.model.MyAuthority.MyAuthorityType;
 import com.enginee.service.ExamService;
 import com.enginee.service.UserService;
 import com.enginee.util.TransResult;
@@ -25,6 +27,7 @@ import com.enginee.util.TransResult;
  */
 @Controller
 @RequestMapping("/exam")
+@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 public class ExamController {
 	@Autowired
 	private ExamService examService;

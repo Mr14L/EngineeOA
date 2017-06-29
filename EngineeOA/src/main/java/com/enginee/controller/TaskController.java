@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.enginee.model.MyAuthority;
 import com.enginee.model.Task;
+import com.enginee.model.MyAuthority.MyAuthorityType;
 import com.enginee.service.TaskService;
 import com.enginee.service.UserService;
 import com.enginee.util.PageModel;
@@ -35,6 +37,7 @@ public class TaskController {
 	//添加回复型任务
 	@RequestMapping("/addReplyTask")
 	@ResponseBody
+	@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 	public TransResult addReplyTask(Task task){
 		return taskService.addReplyTask(task);
 	}
@@ -42,12 +45,14 @@ public class TaskController {
 	//按title查找回复型任务
 	@RequestMapping("/findTaskByTitle")
 	@ResponseBody
+	@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 	public TransResult findTaskByTitle(String title){
 		return taskService.findTaskByTitle(title);
 	}
 	
 	//添加文件型任务
 	@RequestMapping("/addFileTask")
+	@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 	public String addFileTask(Task task,@RequestParam("file") MultipartFile file) throws IllegalStateException, IOException{
 		taskService.addFileTask(task,file);
 		return "task-table";
@@ -55,6 +60,7 @@ public class TaskController {
 	
 	//获得任务列表
 	@RequestMapping("/listTask")
+	@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 	public String listTask(Model model){
 		List<Task> list = taskService.listTask();
 		model.addAttribute("tasklist",list);
@@ -63,6 +69,7 @@ public class TaskController {
 	
 	//删除任务
 	@RequestMapping("/removeTask/{id}")
+	@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 	public String removeTask(@PathVariable Integer id){
 		taskService.removeTask(id);
 		return "redirect:/task/listTask";
@@ -70,6 +77,7 @@ public class TaskController {
 	
 	//查看任务
 	@RequestMapping("/executeTask/{id}")
+	@MyAuthority(value= {MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 	public String executeTask(@PathVariable Integer id,Model model){
 		PageModel page= userService.listByPage(1);
 		Task task = taskService.findById(id);

@@ -36,20 +36,17 @@
 
     <div class="am-tabs am-margin" data-am-tabs>
       </div>
-
-      
-         
           <div class="am-panel am-panel-default">
             <div class="am-panel-hd am-cf" data-am-collapse="{target: '#collapse-panel-3'}">回复<span class="am-icon-chevron-down am-fr" ></span></div>
             <div class="am-panel-bd am-collapse am-in am-cf" id="collapse-panel-3">
               <ul class="am-comments-list admin-content-comment">
                 <li class="am-comment">
-                  <a href="#"><img src="http://s.amazeui.org/media/i/demos/bw-2014-06-19.jpg?imageView/1/w/96/h/96" alt="" class="am-comment-avatar" width="48" height="48"></a>
+                  <a href="#"><img src="${ru.headFile}" alt="" class="am-comment-avatar" width="48" height="48"></a>
                   <div class="am-comment-main">
                     <header class="am-comment-hd">
-                      <div class="am-comment-meta"><a href="#" class="am-comment-author">李若楠</a> 回复于 <time>2017-6-9 15:30</time></div>
+                      <div class="am-comment-meta"><a href="#" class="am-comment-author">${ru.name}</a> 回复于 <time>${reply.replyTime}</time></div>
                     </header>
-                    <div class="am-comment-bd"><p>有时间我一定陪你去师大夜市,我带着你 ,你带着爸爸</p>
+                    <div class="am-comment-bd"><p>${reply.replyContent}</p>
                     </div>
                   </div>
                 </li>

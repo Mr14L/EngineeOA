@@ -110,14 +110,17 @@ public class TaskServiceImpl implements TaskService {
 		query1.setParameter(0, u.getEmail());
 		taskCount.setTotalCount((Long)query1.getResultList().get(0));
 		//获得正在进行的任务数
-		String sql2 = "select count(*) from Task t where t.endTime > ?";
+		String sql2 = "select count(*) from Task t where t.endTime > ? and t.user.email=?";
 		Query query2 = taskDao.getCurrentSession().createQuery(sql2);
 		query2.setParameter(0, LocalDateTime.now());
+		query2.setParameter(1, u.getEmail());
 		taskCount.setNowCount((Long)query2.getResultList().get(0));
+		
 		//获得过期任务
-		String sql3 = "select count(*) from Task t where t.endTime < ?";
+		String sql3 = "select count(*) from Task t where t.endTime < ? and t.user.email=?";
 		Query query3 = taskDao.getCurrentSession().createQuery(sql3);
 		query3.setParameter(0, LocalDateTime.now());
+		query3.setParameter(1, u.getEmail());
 		taskCount.setPastCount((Long)query3.getResultList().get(0));
 		//获得完成任务数
 		String sql4 = "select count(*) from Reply r where r.task.id is not null and r.user.email = ?";

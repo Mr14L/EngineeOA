@@ -4,13 +4,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.enginee.model.MyAuthority;
+import com.enginee.model.MyAuthority.MyAuthorityType;
+
 /**
  * 用于页面间的跳转
  * @author wangbin
  *
  */
 @Controller
-public final class PageTransController{
+@MyAuthority(value= {MyAuthorityType.USER,MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
+public  class PageTransController{
 	@RequestMapping("/toIndexPage")
 	public String toHeadPage() {
 		return "head";

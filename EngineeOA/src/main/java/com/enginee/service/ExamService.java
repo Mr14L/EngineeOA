@@ -3,6 +3,8 @@ package com.enginee.service;
 
 import java.util.List;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.enginee.model.Exam;
 import com.enginee.util.PageModel;
 import com.enginee.util.TransResult;
@@ -26,6 +28,8 @@ public interface ExamService {
 	List<Exam> listExamByPage(Integer pageNow);
 
 	PageModel getPage();
+	
+	List<Exam> getAll();
 
 	
 	

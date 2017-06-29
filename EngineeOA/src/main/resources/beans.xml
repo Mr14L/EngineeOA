@@ -16,12 +16,15 @@
 	com.enginee.model,
 	com.enginee.dao,
 	com.enginee.service.impl,
+	com.enginee.interceptor,
+	com.enginee.timer,
 	com.enginee.controller"/>
 	<context:property-placeholder location="classpath:*.properties" order="2"/>
 	<!-- 事务管理使用注释 -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 	<!-- 使用GBLIB，基于类创建代理对象，用于业务层事务 -->
 	<aop:aspectj-autoproxy proxy-target-class="true" />
+	<tx:annotation-driven/>
 	
 	<!-- 配置数据源 -->
 	<bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">

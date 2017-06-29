@@ -28,6 +28,7 @@
 					{"tid":$("#t").val(),"replyContent":$("textarea[name='replyContent']").val()},
 				function(data){
 				alert("修改成功");
+				location.href="${pageContext.request.contextPath}/user-task/toTaskUserTable";
 			});
 		});
 		

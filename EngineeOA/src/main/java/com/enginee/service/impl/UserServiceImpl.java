@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 		try {
 			User user = userDao.find(email);
 			//DigestUtils.md5DigestAsHex(password.getBytes())
-			if(user !=null && user.getPassword().equals(password)) {
+			if(user !=null && user.getPassword().equals(DigestUtils.md5DigestAsHex(password.getBytes()))) {
 				HttpSession httpSession = (HttpSession)RequestContextHolder.getRequestAttributes().getSessionMutex();
 				httpSession.setAttribute("user", user);
  				return TransResult.ok();
@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService{
 			if(pageNow<page.getPageCount()){
 					page.setList(list.subList((pageNow-1)*5, pageNow*5-1));
 			}else{
-					page.setList(list.subList((pageNow-1)*5, list.size()-1));
+					page.setList(list.subList((pageNow-1)*5, list.size())); 
 			}
 			page.setPageNow(pageNow);
 			}else{
@@ -195,6 +195,11 @@ public class UserServiceImpl implements UserService{
 			return TransResult.build(500, "服务器错误");
 		}
 		return TransResult.ok();
+	}
+	@Override
+	@Transactional
+	public User getEntity(String email){
+		return userDao.find(email);
 	}
 
 }

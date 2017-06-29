@@ -12,9 +12,13 @@
 	<mvc:resources location="/file/" mapping="/file/**"></mvc:resources>
 	<mvc:interceptors>  
         <mvc:interceptor>  
-            <mvc:mapping path=""/>  
-            <mvc:mapping path=""/>  
-            <mvc:mapping path=""/>  
+            <mvc:mapping path="/**"/> 
+            <mvc:exclude-mapping path="/login/**"/> 
+            <mvc:exclude-mapping path="/assets/js/**"/>  
+            <mvc:exclude-mapping path="/assets/css/**"/>  
+            <mvc:exclude-mapping path="/assets/fonts/**"/>  
+            <mvc:exclude-mapping path="/assets/i/**"/>  
+            <mvc:exclude-mapping path="/images/**"/>
             <bean class="com.enginee.interceptor.AuthorInterceptor"></bean>  
         </mvc:interceptor>  
     </mvc:interceptors>
@@ -25,4 +29,12 @@
 	</bean>
 	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	 </bean>
+	 <!-- 异常处理页面 -->
+	 <bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="java.lang.Exception">admin-500</prop>
+            </props>
+        </property>
+    </bean>
 </beans>

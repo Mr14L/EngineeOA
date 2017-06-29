@@ -33,4 +33,6 @@ public interface UserService{
 
 	TransResult addUser(User user);
 
+	User getEntity(String email);
+
 }

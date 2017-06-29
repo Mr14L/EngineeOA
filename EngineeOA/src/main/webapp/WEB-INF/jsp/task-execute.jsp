@@ -64,7 +64,7 @@
             	<c:choose>
             	<c:when test="${u.reply.replyTime!=null && u.reply.task.id==task.id}">
             		<c:if test="${u.reply.task.endTime.isAfter(u.reply.replyTime) }">
-            			<c:out value="正常完成"></c:out> 
+            			<c:out  value="正常完成"></c:out> 
             		</c:if> 
             		<c:if test="${u.reply.task.endTime.isBefore(u.reply.replyTime) }">
             			<c:out value="超时完成"></c:out> 
@@ -82,14 +82,12 @@
               	<td>
                   	<div class="am-btn-toolbar">
                     	<div class="am-btn-group am-btn-group-xs">
-                    	
-                    	<c:if test="${task.taskType=='回复性任务'}">
-                    	<a href="${pageContext.request.contextPath}/user-task/findReply/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
+                    	<c:if test="${task.taskType=='回复性任务' && u.reply.replyTime!=null}">
+                    	<a href="${pageContext.request.contextPath}/user-task/findReply/email?email=${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-pencil-square-o"></span>查看回复</a>
                     	</c:if>
-                      	<c:if test="${task.taskType=='文件型任务'}">
-                      	<a href="${pageContext.request.contextPath}/task/task-download/${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
+                      	<c:if test="${task.taskType=='文件型任务' && u.reply.replyTime!=null}">
+                      	<a href="${pageContext.request.contextPath}/task/task-download/email?email=${u.email}" class="am-btn am-btn-default am-btn-xs am-text-secondary"><span class="am-icon-chain"></span>下载附件</a>
                       	</c:if>
-                      	
                     </div>
                   </div>
                 </td>

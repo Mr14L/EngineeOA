@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.enginee.model.MyAuthority;
 import com.enginee.model.User;
+import com.enginee.model.MyAuthority.MyAuthorityType;
 import com.enginee.service.UserService;
 import com.enginee.util.TransResult;
 /**
@@ -21,6 +23,7 @@ import com.enginee.util.TransResult;
  */
 @Controller
 @RequestMapping("/user")
+@MyAuthority(value= {MyAuthorityType.USER,MyAuthorityType.ADMIN,MyAuthorityType.SUPERADMIN})
 public class UserController {
 	@Autowired
 	private UserService userService;

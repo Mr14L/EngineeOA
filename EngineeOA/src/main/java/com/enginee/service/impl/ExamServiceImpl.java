@@ -163,5 +163,10 @@ public class ExamServiceImpl implements ExamService{
 		return page;
 	}
 	
+	@Transactional
+	public List<Exam> getAll(){
+		return examDao.find();
+	}
+	
 
 }
